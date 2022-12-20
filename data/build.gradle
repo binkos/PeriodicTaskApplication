@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -31,5 +32,9 @@ android {
 }
 
 dependencies {
+    def room_version = "2.4.3"
     implementation "androidx.core:core-ktx:$ktx_version"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 }
