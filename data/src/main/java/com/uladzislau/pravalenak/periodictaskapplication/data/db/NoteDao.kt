@@ -7,19 +7,29 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.uladzislau.pravalenak.periodictaskapplication.data.db.entity.NoteEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NoteDao {
 
     @Insert
-    fun addNote(note: NoteEntity)
+    suspend fun addNote(note: NoteEntity)
 
     @Update(entity = NoteEntity::class, onConflict = OnConflictStrategy.REPLACE)
-    fun updateNote(note: NoteEntity)
+    suspend fun updateNote(note: NoteEntity)
 
     @Delete
-    fun removeNote(note: NoteEntity)
+    suspend fun removeNote(note: NoteEntity)
 
     @Query("Select * from note")
-    suspend fun getAllNotes(): List<NoteEntity>
+    fun getAllNotes(): Flow<List<NoteEntity>>
+
+    @Query(
+        """
+        Select *
+        from note
+        where id=:id
+    """
+    )
+    suspend fun getNoteById(id: Int): NoteEntity
 }

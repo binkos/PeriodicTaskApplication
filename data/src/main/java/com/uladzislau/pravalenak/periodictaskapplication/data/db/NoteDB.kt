@@ -31,5 +31,7 @@ abstract class NoteDB : RoomDatabase() {
                 instance
             }
         }
+
+        fun getDao(): NoteDao? = INSTANCE?.userDao()
     }
 }

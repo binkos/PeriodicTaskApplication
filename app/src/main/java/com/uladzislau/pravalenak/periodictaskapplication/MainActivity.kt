@@ -6,15 +6,18 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.uladzislau.pravalenak.periodictaskapplication.data.db.NoteDB
+import com.uladzislau.pravalenak.periodictaskapplication.data.db.NoteDao
+import com.uladzislau.pravalenak.periodictaskapplication.navigation.OwnHost
 import com.uladzislau.pravalenak.periodictaskapplication.ui.theme.PeriodicTaskApplicationTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        NoteDB.getDatabase(this)
+
         setContent {
             PeriodicTaskApplicationTheme {
                 // A surface container using the 'background' color from the theme
@@ -22,22 +25,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    val navHostController = rememberNavController()
+                    OwnHost(modifier = Modifier, navController = navHostController)
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    PeriodicTaskApplicationTheme {
-        Greeting("Android")
     }
 }

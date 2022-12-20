@@ -8,7 +8,7 @@ import java.util.Date
 @Entity(tableName = "note")
 data class NoteEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int?,
     @ColumnInfo(name = "title")
     val title: String,
     @ColumnInfo(name = "text")
