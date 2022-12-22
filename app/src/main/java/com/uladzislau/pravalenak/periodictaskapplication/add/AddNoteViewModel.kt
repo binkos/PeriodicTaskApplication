@@ -7,14 +7,15 @@ import com.uladzislau.pravalenak.periodictaskapplication.core.mvi.DefaultStateDe
 import com.uladzislau.pravalenak.periodictaskapplication.core.mvi.EventDelegate
 import com.uladzislau.pravalenak.periodictaskapplication.core.mvi.StateDelegate
 import com.uladzislau.pravalenak.periodictaskapplication.data.db.NoteDB
-import com.uladzislau.pravalenak.periodictaskapplication.data.db.entity.NoteEntity
-import com.uladzislau.pravalenak.periodictaskapplication.data.repository.DataRepository
 import com.uladzislau.pravalenak.periodictaskapplication.data.repository.DataRepositoryImpl.Companion.createRepository
+import com.uladzislau.pravalenak.periodictaskapplication.domain.model.NewNoteModel
+import com.uladzislau.pravalenak.periodictaskapplication.domain.usecase.DataUseCase
+import com.uladzislau.pravalenak.periodictaskapplication.domain.usecase.DataUseCaseImpl
 import kotlinx.coroutines.launch
 import java.util.*
 
 class AddNoteViewModel(
-    private val repository: DataRepository = createRepository(NoteDB.getDao()!!)
+    private val repository: DataUseCase = DataUseCaseImpl(createRepository(NoteDB.getDao()!!))
 ) : ViewModel(),
     StateDelegate<AddNoteState> by DefaultStateDelegate(AddNoteState()),
     EventDelegate<AddNoteSideEffect> by DefaultEventDelegate() {
@@ -30,8 +31,8 @@ class AddNoteViewModel(
                 }
             is AddNoteEvent.OnNoteAdded -> {
                 viewModelScope.launch {
-                    val entity = NoteEntity(null, event.title, event.description, Date())
-                    repository.addField(entity)
+                    val model = NewNoteModel(event.title, event.description, Date())
+                    repository.addNote(model)
                     sendEvent(AddNoteSideEffect.OnNoteCreated)
                 }
             }
