@@ -1,4 +1,4 @@
-package com.uladzislau.pravalenak.periodictaskapplication.main
+package com.uladzislau.pravalenak.periodictaskapplication.screens.main
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column

@@ -1,4 +1,4 @@
-package com.uladzislau.pravalenak.periodictaskapplication.details
+package com.uladzislau.pravalenak.periodictaskapplication.screens.details
 
 import com.uladzislau.pravalenak.periodictaskapplication.models.NoteModel
 

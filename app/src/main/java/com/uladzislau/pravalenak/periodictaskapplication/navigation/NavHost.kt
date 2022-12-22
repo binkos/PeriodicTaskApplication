@@ -10,10 +10,10 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.uladzislau.pravalenak.periodictaskapplication.add.AddNote
-import com.uladzislau.pravalenak.periodictaskapplication.details.DetailsNote
-import com.uladzislau.pravalenak.periodictaskapplication.details.NOTE_ID
-import com.uladzislau.pravalenak.periodictaskapplication.main.AllNotes
+import com.uladzislau.pravalenak.periodictaskapplication.screens.add.AddNote
+import com.uladzislau.pravalenak.periodictaskapplication.screens.details.DetailsNote
+import com.uladzislau.pravalenak.periodictaskapplication.screens.details.NOTE_ID
+import com.uladzislau.pravalenak.periodictaskapplication.screens.main.AllNotes
 
 @Composable
 fun OwnHost(

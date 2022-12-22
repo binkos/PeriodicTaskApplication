@@ -1,4 +1,4 @@
-package com.uladzislau.pravalenak.periodictaskapplication.add
+package com.uladzislau.pravalenak.periodictaskapplication.screens.add
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
