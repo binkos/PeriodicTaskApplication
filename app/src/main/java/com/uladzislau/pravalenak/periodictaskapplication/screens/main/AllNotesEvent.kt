@@ -1,4 +1,4 @@
-package com.uladzislau.pravalenak.periodictaskapplication.main
+package com.uladzislau.pravalenak.periodictaskapplication.screens.main
 
 sealed class AllNotesEvent {
     object OnAddButtonClicked : AllNotesEvent()

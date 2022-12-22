@@ -1,4 +1,4 @@
-package com.uladzislau.pravalenak.periodictaskapplication.add
+package com.uladzislau.pravalenak.periodictaskapplication.screens.add
 
 sealed class AddNoteEvent {
     class OnTitleUpdate(val text: String) : AddNoteEvent()

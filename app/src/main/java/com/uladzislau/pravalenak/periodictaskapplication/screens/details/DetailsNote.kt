@@ -1,4 +1,4 @@
-package com.uladzislau.pravalenak.periodictaskapplication.details
+package com.uladzislau.pravalenak.periodictaskapplication.screens.details
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

@@ -1,7 +1,8 @@
-package com.uladzislau.pravalenak.periodictaskapplication.details
+package com.uladzislau.pravalenak.periodictaskapplication.screens.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.uladzislau.pravalenak.periodictaskapplication.core.compose.StableList
 import com.uladzislau.pravalenak.periodictaskapplication.core.mvi.DefaultStateDelegate
 import com.uladzislau.pravalenak.periodictaskapplication.core.mvi.StateDelegate
 import com.uladzislau.pravalenak.periodictaskapplication.data.db.NoteDB
@@ -11,22 +12,25 @@ import com.uladzislau.pravalenak.periodictaskapplication.domain.usecase.DataUseC
 import com.uladzislau.pravalenak.periodictaskapplication.models.NoteModel
 import kotlinx.coroutines.launch
 
-class DetailsViewModel(
+class AllNotesViewModel(
     private val useCase: DataUseCase = DataUseCaseImpl(createRepository(NoteDB.getDao()!!))
 ) : ViewModel(),
-    StateDelegate<DetailsNoteState> by DefaultStateDelegate(DetailsNoteState()) {
+    StateDelegate<AllNotesState> by DefaultStateDelegate(AllNotesState()) {
 
-    fun onInit(noteId: Int) {
+    init {
         viewModelScope.launch {
-            val model = useCase.getNoteById(noteId)
-            val note =
-                NoteModel(
-                    model.id,
-                    model.title,
-                    model.description,
-                    model.date.time.toString()
-                )
-            updateState { copy(note = note) }
+            useCase.getNoteModels().collect {
+                val models = it.map { domainModel ->
+                    NoteModel(
+                        id = domainModel.id,
+                        title = domainModel.title,
+                        text = domainModel.description,
+                        date = domainModel.date.time.toString()
+                    )
+                }
+
+                updateState { copy(model = StableList(models)) }
+            }
         }
     }
 }
